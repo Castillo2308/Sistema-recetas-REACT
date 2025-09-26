@@ -1,0 +1,424 @@
+/* ================================
+   ESTILOS DE AUTENTICACIÓN
+   ================================
+   
+   Este archivo contiene todos los estilos para las páginas de 
+   autenticación (login y registro) de la aplicación de recetas.
+   Incluye formularios, estados de validación y diseño responsivo.
+*/
+
+/* ================================
+   RESET Y VARIABLES GLOBALES
+   ================================ */
+
+/* Reset básico para eliminar estilos por defecto del navegador */
+* {
+    margin: 0;                             /* Elimina márgenes por defecto */
+    padding: 0;                            /* Elimina padding por defecto */
+    box-sizing: border-box;                /* Incluye padding y border en el tamaño total */
+}
+
+/* Variables CSS personalizadas para consistencia de diseño */
+:root {
+    /* Colores principales de la aplicación */
+    --primary-color: #f97316;              /* Naranja principal */
+    --primary-dark: #ea580c;               /* Naranja oscuro para hover */
+    --secondary-color: #14b8a6;            /* Verde azulado secundario */
+    
+    /* Colores de estado para feedback del usuario */
+    --success-color: #22c55e;              /* Verde para éxito */
+    --error-color: #ef4444;                /* Rojo para errores */
+    --warning-color: #f59e0b;              /* Amarillo para advertencias */
+    
+    /* Escala de grises para textos y fondos */
+    --gray-50: #f9fafb;                    /* Gris muy claro */
+    --gray-100: #f3f4f6;                   /* Gris claro */
+    --gray-200: #e5e7eb;                   /* Gris para bordes */
+    --gray-300: #d1d5db;                   /* Gris medio claro */
+    --gray-400: #9ca3af;                   /* Gris medio */
+    --gray-500: #6b7280;                   /* Gris */
+    --gray-600: #4b5563;                   /* Gris oscuro */
+    --gray-700: #374151;                   /* Gris muy oscuro */
+    --gray-800: #1f2937;                   /* Casi negro */
+    --gray-900: #111827;                   /* Negro suave */
+    --white: #ffffff;                      /* Blanco puro */
+    
+    /* Sistema de sombras para profundidad */
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);         /* Sombra estándar */
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* Sombra grande */
+    
+    /* Bordes redondeados consistentes */
+    --radius: 0.5rem;                      /* Radio estándar */
+    --radius-lg: 1rem;                     /* Radio grande */
+}
+
+/* ================================
+   LAYOUT PRINCIPAL
+   ================================ */
+
+/* Estilos base del documento para páginas de autenticación */
+body {
+    font-family: system-ui, -apple-system, sans-serif; /* Fuente del sistema para mejor rendimiento */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Gradiente de fondo */
+    min-height: 100vh;                     /* Altura mínima de pantalla completa */
+    display: flex;                         /* Flexbox para centrado */
+    align-items: center;                   /* Centrado vertical */
+    justify-content: center;               /* Centrado horizontal */
+    padding: 1rem;                         /* Padding para espaciado en móviles */
+}
+
+/* Contenedor principal del formulario de autenticación */
+.auth-container {
+    width: 100%;                           /* Ancho completo hasta el máximo */
+    max-width: 400px;                      /* Ancho máximo para formularios */
+}
+
+/* Tarjeta contenedora del formulario */
+.auth-card {
+    background: var(--white);              /* Fondo blanco limpio */
+    border-radius: var(--radius-lg);       /* Bordes redondeados */
+    box-shadow: var(--shadow-lg);          /* Sombra prominente para elevación */
+    padding: 2rem;
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ================================
+   HEADER DEL FORMULARIO
+   ================================ */
+
+/* Icono principal del formulario */
+.auth-header i {
+    font-size: 3rem;                       /* Tamaño grande para impacto visual */
+    color: var(--primary-color);           /* Color primario de la marca */
+    margin-bottom: 1rem;                   /* Espaciado inferior */
+}
+
+/* Título principal del formulario */
+.auth-header h1 {
+    color: var(--gray-900);                /* Color oscuro para contraste */
+    font-size: 1.5rem;                     /* Tamaño prominente */
+    font-weight: 700;                      /* Peso bold */
+    margin-bottom: 0.5rem;                 /* Espaciado inferior */
+}
+
+/* Descripción bajo el título */
+.auth-header p {
+    color: var(--gray-600);                /* Color suave para texto secundario */
+    font-size: 0.875rem;                   /* Tamaño menor */
+}
+
+/* ================================
+   FORMULARIOS DE AUTENTICACIÓN
+   ================================ */
+
+/* Contenedor principal del formulario */
+.auth-form {
+    display: flex;                         /* Layout flexbox */
+    flex-direction: column;                /* Elementos en columna */
+    gap: 1.5rem;                          /* Espaciado entre elementos */
+}
+
+/* Fila de formulario para campos lado a lado */
+.form-row {
+    display: grid;                         /* Grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Columnas responsivas */
+    gap: 1rem;                            /* Espaciado entre columnas */
+}
+
+/* Grupo individual de campo del formulario */
+.form-group {
+    display: flex;                         /* Layout flexbox */
+    flex-direction: column;                /* Label arriba, input abajo */
+}
+
+/* Etiquetas de los campos */
+.form-group label {
+    color: var(--gray-700);                /* Color oscuro para legibilidad */
+    font-weight: 500;                      /* Peso medio */
+    margin-bottom: 0.5rem;                 /* Espaciado antes del input */
+    font-size: 0.875rem;                   /* Tamaño consistente */
+}
+
+/* Estilos base para campos de entrada */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem;                      /* Padding generoso */
+    border: 2px solid var(--gray-200);     /* Borde sutil */
+    border-radius: var(--radius);          /* Bordes redondeados */
+    font-size: 0.875rem;                   /* Tamaño de texto */
+    transition: all 0.2s;                  /* Transición suave para estados */
+    background: var(--white);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgb(249 115 22 / 0.1);
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+
+.password-toggle:hover {
+    color: var(--gray-600);
+}
+
+/* Ensure input text doesn't hide behind the toggle button */
+.password-input input {
+    padding-right: 2.25rem; /* space for eye icon */
+}
+
+.form-help {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    margin-top: 0.25rem;
+}
+
+/* ================================
+   BOTONES Y ACCIONES
+   ================================ */
+
+/* Botón principal del formulario */
+.btn-primary {
+    background: var(--primary-color);      /* Color de fondo primario */
+    color: var(--white);                   /* Texto blanco */
+    border: none;                          /* Sin borde */
+    padding: 0.875rem 1.5rem;             /* Padding generoso */
+    border-radius: var(--radius);         /* Bordes redondeados */
+    font-weight: 500;                      /* Peso medio */
+    font-size: 0.875rem;                   /* Tamaño de texto */
+    cursor: pointer;                       /* Cursor de puntero */
+    transition: all 0.2s;                  /* Animación suave */
+    display: flex;                         /* Flexbox para centrado */
+    align-items: center;                   /* Centrado vertical */
+    justify-content: center;               /* Centrado horizontal */
+    gap: 0.5rem;                          /* Espaciado entre elementos */
+}
+
+/* Estado hover del botón primario */
+.btn-primary:hover {
+    background: var(--primary-dark);       /* Color más oscuro */
+    transform: translateY(-1px);           /* Ligera elevación */
+    box-shadow: var(--shadow);             /* Sombra para efecto de elevación */
+}
+
+/* Estado activo del botón */
+.btn-primary:active {
+    transform: translateY(0);              /* Regresa a posición original */
+}
+
+/* ================================
+   PIE DEL FORMULARIO
+   ================================ */
+
+/* Contenedor del pie del formulario */
+.auth-footer {
+    text-align: center;                    /* Texto centrado */
+    margin-top: 1.5rem;                   /* Margen superior */
+    padding-top: 1.5rem;                  /* Padding superior */
+    border-top: 1px solid var(--gray-200); /* Línea separadora sutil */
+}
+
+.auth-footer p {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+.auth-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Loading */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--gray-200);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading p {
+    color: var(--white);
+    font-weight: 500;
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toast {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 1rem;
+    max-width: 350px;
+    border-left: 4px solid var(--primary-color);
+    animation: slideInRight 0.3s ease;
+    position: relative;
+}
+
+.toast.success {
+    border-left-color: var(--success-color);
+}
+
+.toast.error {
+    border-left-color: var(--error-color);
+}
+
+.toast.warning {
+    border-left-color: var(--warning-color);
+}
+
+.toast-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.toast-icon {
+    font-size: 1.25rem;
+    margin-top: 0.125rem;
+}
+
+.toast-message {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.toast-description {
+    color: var(--gray-600);
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.toast-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem;
+}
+
+.toast-close:hover {
+    color: var(--gray-600);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 1.5rem;
+    }
+    
+    .form-row { grid-template-columns: 1fr; }
+    
+    .toast-container {
+        left: 1rem;
+        right: 1rem;
+    }
+    
+    .toast {
+        max-width: none;
+    }
+}
+
+/* Breakpoint intermedio para teléfonos grandes / tablets verticales donde 2 columnas rígidas causaban overflow */
+@media (max-width: 640px) and (min-width: 481px) {
+    .form-row { grid-template-columns: 1fr 1fr; }
+    .form-row .form-group input { width:100%; }
+}
+
+/* Prevención de overflow en cualquier caso: los inputs nunca exceden su contenedor */
+.form-row .form-group input { width: 100%; min-width:0; }
+
+@media (max-width: 768px) and (min-width: 641px) {
+    .auth-card { padding: 1.75rem; }
+    .form-row { gap: 0.75rem; }
+}

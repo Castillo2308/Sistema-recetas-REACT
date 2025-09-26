@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votos y Opiniones - Sistema de Recetas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="votos.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <i class="fas fa-utensils"></i>
+        <span>Sistema de Recetas</span>
+      </div>
+      <div class="nav-menu">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="recipes.html" class="nav-link">Recetas</a>
+        <a href="ingredients.html" class="nav-link">Ingredientes</a>
+        <a href="votos.html" class="nav-link active">Votos</a>
+      </div>
+      <div class="nav-user">
+        <span id="userName">Usuario</span>
+        <button class="btn-logout" id="btnLogout">
+          <i class="fas fa-sign-out-alt"></i>
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1>Votar y Opinar</h1>
+        <div></div>
+      </div>
+
+      <div class="search-filters">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Buscar recetas..." />
+          <button id="btnSearch"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="filters">
+          <select id="categoryFilter">
+            <option value="">Todas las categorías</option>
+            <option value="Desayuno">Desayuno</option>
+            <option value="Almuerzo">Almuerzo</option>
+            <option value="Cena">Cena</option>
+            <option value="Postre">Postre</option>
+            <option value="Snack">Snack</option>
+            <option value="Bebida">Bebida</option>
+          </select>
+          <select id="difficultyFilter">
+            <option value="">Todas las dificultades</option>
+            <option value="Fácil">Fácil</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Difícil">Difícil</option>
+          </select>
+        </div>
+      </div>
+
+  <div id="recipesGrid" class="recipes-grid" data-state="idle"></div>
+
+      <div id="loading" class="loading" style="display:none;">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de voto/comentarios -->
+  <div id="voteModal" class="modal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Opinar sobre <span id="voteRecipeTitle">Receta</span></h2>
+        <button class="modal-close" id="voteModalClose">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:1.5rem;">
+        <div class="recipe-detail-header">
+          <img id="voteRecipeImage" class="recipe-detail-image" alt="Receta" />
+          <div class="recipe-detail-info">
+            <h3 id="voteRecipeHeading">Título</h3>
+            <p id="voteRecipeDesc" style="color:var(--gray-600);"></p>
+            <div class="recipe-detail-meta">
+              <div class="recipe-detail-meta-item">
+                <strong id="voteAvg">0.0</strong>
+                <span>promedio</span>
+              </div>
+              <div class="recipe-detail-meta-item">
+                <strong id="voteCount">0</strong>
+                <span>votos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+          <section>
+            <h3 style="margin-bottom:0.5rem;"><i class="fas fa-star"></i> Tu voto</h3>
+            <form id="voteForm">
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem;">
+                <div id="starRating" aria-label="Calificación" role="radiogroup"></div>
+                <span id="starValue" style="color:var(--gray-600);">0/5</span>
+              </div>
+              <div class="form-group">
+                <label for="voteComment">Comentario (opcional)</label>
+                <textarea id="voteComment" rows="3" placeholder="¿Qué te pareció esta receta?"></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn-secondary" id="btnDeleteVote" style="display:none;">Eliminar voto</button>
+                <button type="submit" class="btn-primary">Enviar</button>
+              </div>
+            </form>
+          </section>
+
+          <section>
+            <h3 style="margin-bottom:0.5rem;"><i class="fas fa-comments"></i> Opiniones</h3>
+            <div id="votesList" class="ingredients-list" style="max-height:320px;"></div>
+            <div style="display:flex; justify-content:space-between; margin-top:0.5rem;">
+              <button class="btn-secondary" id="btnPrevVotes">Anterior</button>
+              <button class="btn-secondary" id="btnNextVotes">Siguiente</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="votos.js"></script>
+</body>
+</html>

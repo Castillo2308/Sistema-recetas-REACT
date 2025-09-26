@@ -1,0 +1,752 @@
+/* ===================================
+   ESTILOS PARA LA PÁGINA PRINCIPAL (LANDING)
+   Sistema de Recetas de Cocina
+   ===================================
+   
+   Este archivo contiene todos los estilos para index.html
+   - Sistema de colores consistente
+   - Diseño responsive
+   - Animaciones y transiciones suaves
+   - Componentes reutilizables (botones, cards, etc.)
+*/
+
+/* ===================================
+   RESET Y ESTILOS BASE
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+/* ===================================
+   SISTEMA DE COLORES Y VARIABLES CSS
+   Define una paleta consistente para toda la aplicación
+   =================================== */
+:root {
+    /* Colores Primarios (naranjas) - Para elementos principales */
+    --primary-50: #fff7ed;
+    --primary-100: #ffedd5;
+    --primary-200: #fed7aa;
+    --primary-300: #fdba74;
+    --primary-400: #fb923c;
+    --primary-500: #f97316;
+    --primary-600: #ea580c;
+    --primary-700: #c2410c;
+    --primary-800: #9a3412;
+    --primary-900: #7c2d12;
+
+    --secondary-50: #ecfdf5;
+    --secondary-100: #d1fae5;
+    --secondary-200: #a7f3d0;
+    --secondary-300: #6ee7b7;
+    --secondary-400: #34d399;
+    --secondary-500: #10b981;
+    --secondary-600: #059669;
+    --secondary-700: #047857;
+    --secondary-800: #065f46;
+    --secondary-900: #064e3b;
+
+    --accent-50: #eff6ff;
+    --accent-100: #dbeafe;
+    --accent-200: #bfdbfe;
+    --accent-300: #93c5fd;
+    --accent-400: #60a5fa;
+    --accent-500: #3b82f6;
+    --accent-600: #2563eb;
+    --accent-700: #1d4ed8;
+    --accent-800: #1e40af;
+    --accent-900: #1e3a8a;
+
+    /* Colores de estado para mensajes y notificaciones */
+    --success-500: #22c55e;    /* Verde para estados de éxito */
+    --warning-500: #f59e0b;    /* Naranja para advertencias */
+    --error-500: #ef4444;      /* Rojo para errores */
+
+    /* Neutral Colors - Escala de grises para textos y fondos */
+    --gray-50: #f9fafb;        /* Gris muy claro para fondos sutiles */
+    --gray-100: #f3f4f6;       /* Gris claro para contenedores */
+    --gray-200: #e5e7eb;       /* Gris para bordes suaves */
+    --gray-300: #d1d5db;       /* Gris medio para separadores */
+    --gray-400: #9ca3af;       /* Gris para texto secundario */
+    --gray-500: #6b7280;       /* Gris medio para texto normal */
+    --gray-600: #4b5563;       /* Gris oscuro para texto importante */
+    --gray-700: #374151;       /* Gris muy oscuro para títulos */
+    --gray-800: #1f2937;       /* Gris casi negro para contenido principal */
+    --gray-900: #111827;       /* Negro suave para texto principal */
+
+    /* Sistema de espaciado consistente basado en múltiplos de 0.25rem (4px) */
+    --space-1: 0.25rem;        /* 4px - espaciado mínimo */
+    --space-2: 0.5rem;         /* 8px - padding pequeño */
+    --space-3: 0.75rem;        /* 12px - espaciado entre elementos */
+    --space-4: 1rem;           /* 16px - espaciado estándar */
+    --space-5: 1.25rem;        /* 20px - margen medio */
+    --space-6: 1.5rem;         /* 24px - separación de secciones */
+    --space-8: 2rem;           /* 32px - espaciado generoso */
+    --space-10: 2.5rem;        /* 40px - separación de componentes */
+    --space-12: 3rem;          /* 48px - espaciado grande */
+    --space-16: 4rem;          /* 64px - separación de bloques */
+    --space-20: 5rem;          /* 80px - espaciado muy grande */
+    --space-24: 6rem;          /* 96px - separación máxima */
+
+    /* Tipografía - fuente del sistema para mejor rendimiento */
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Bordes redondeados para diferentes componentes */
+    --radius-sm: 0.25rem;      /* 4px - bordes sutiles */
+    --radius: 0.5rem;          /* 8px - radio estándar */
+    --radius-md: 0.75rem;      /* 12px - radio medio */
+    --radius-lg: 1rem;         /* 16px - radio grande */
+    --radius-xl: 1.5rem;       /* 24px - radio muy grande */
+    --radius-2xl: 2rem;        /* 32px - radio máximo */
+
+    /* Sistema de sombras para profundidad y elevación */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);                                           /* Sombra mínima */
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);             /* Sombra estándar */
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);       /* Sombra media */
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);     /* Sombra grande */
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);    /* Sombra muy grande */
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);                                    /* Sombra máxima */
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition: 200ms ease;
+    --transition-slow: 300ms ease;
+}
+
+/* ================================
+   CONFIGURACIÓN GLOBAL
+   ================================ */
+
+/* Comportamiento suave de desplazamiento para navegación */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilos base del documento */
+body {
+    font-family: var(--font-sans);           /* Fuente del sistema */
+    font-size: 16px;                         /* Tamaño base de texto */
+    line-height: 1.6;                        /* Altura de línea para legibilidad */
+    color: var(--gray-800);                  /* Color de texto principal */
+    background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 50%, var(--accent-50) 100%);
+    min-height: 100vh;                       /* Altura mínima de ventana completa */
+}
+
+/* ================================
+   SISTEMA TIPOGRÁFICO
+   ================================ */
+
+/* Estilos base para todos los encabezados */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;                        /* Peso de fuente negrita */
+    line-height: 1.2;                        /* Altura de línea compacta para títulos */
+    margin-bottom: var(--space-4);           /* Espaciado inferior consistente */
+    color: var(--gray-900);                  /* Color oscuro para mayor contraste */
+}
+
+/* Escala tipográfica jerárquica */
+h1 { font-size: 3.5rem; }                   /* 56px - Título principal */
+h2 { font-size: 2.5rem; }                   /* 40px - Subtítulos importantes */
+h3 { font-size: 1.875rem; }                 /* 30px - Títulos de sección */
+h4 { font-size: 1.5rem; }                   /* 24px - Títulos de subsección */
+h5 { font-size: 1.25rem; }                  /* 20px - Títulos menores */
+h6 { font-size: 1.125rem; }                 /* 18px - Títulos más pequeños */
+
+/* Estilos para párrafos */
+p {
+    margin-bottom: var(--space-4);           /* Espaciado entre párrafos */
+    color: var(--gray-600);                  /* Color más suave para texto de lectura */
+}
+
+/* ================================
+   SISTEMA DE CONTENEDORES
+   ================================ */
+
+/* Contenedor principal con ancho máximo centrado */
+.container {
+    max-width: 1200px;                      /* Ancho máximo para contenido */
+    margin: 0 auto;                         /* Centrado horizontal */
+    padding: 0 var(--space-4);              /* Padding lateral responsivo */
+}
+
+/* ================================
+   NAVEGACIÓN PRINCIPAL
+   ================================ */
+
+/* Header con efecto glassmorphism */
+.header {
+    background: rgba(255, 255, 255, 0.95);  /* Fondo semi-transparente */
+    backdrop-filter: blur(20px);             /* Efecto de desenfoque de fondo */
+    box-shadow: var(--shadow-lg);            /* Sombra para elevación */
+    position: sticky;                        /* Navegación pegajosa */
+    top: 0;                                  /* Posición fija en la parte superior */
+    z-index: 1000;                          /* Por encima de otros elementos */
+    border-bottom: 1px solid var(--primary-100); /* Borde inferior sutil */
+}
+
+/* Contenedor de la barra de navegación */
+.navbar {
+    padding: var(--space-4) 0;              /* Padding vertical */
+}
+
+/* Layout flexbox para elementos de navegación */
+.nav-container {
+    display: flex;                          /* Layout flexbox */
+    justify-content: space-between;         /* Espaciado entre elementos */
+    align-items: center;                    /* Alineación vertical centrada */
+    max-width: 1200px;                     /* Ancho máximo consistente */
+    margin: 0 auto;                        /* Centrado horizontal */
+    padding: 0 var(--space-4);             /* Padding lateral */
+}
+
+/* Logo/marca de la aplicación */
+.nav-brand {
+    display: flex;                          /* Layout flexbox para logo e icono */
+    align-items: center;                    /* Alineación vertical */
+    gap: var(--space-3);                    /* Espaciado entre elementos */
+    font-weight: 800;                       /* Peso de fuente extra bold */
+    font-size: 1.5rem;                      /* Tamaño prominente */
+    background: linear-gradient(135deg, var(--primary-500), var(--secondary-500)); /* Gradiente de marca */
+    -webkit-background-clip: text;          /* Recorte del gradiente al texto */
+    -webkit-text-fill-color: transparent;   /* Hace el texto transparente para mostrar gradiente */
+    background-clip: text;                  /* Soporte para otros navegadores */
+}
+
+/* Icono del logo con mismo gradiente */
+.nav-brand i {
+    font-size: 2rem;                        /* Tamaño de icono prominente */
+    background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Contenedor de botones de autenticación */
+.nav-auth {
+    display: flex;                          /* Layout flexbox */
+    gap: var(--space-4);                    /* Espaciado entre botones */
+    align-items: center;                    /* Alineación vertical */
+}
+
+/* ================================
+   SISTEMA DE BOTONES
+   ================================ */
+
+/* Clase base para todos los botones */
+.btn {
+    display: inline-flex;                   /* Flexbox para alineación interna */
+    align-items: center;                    /* Centrado vertical de contenido */
+    gap: var(--space-2);                    /* Espaciado entre texto e icono */
+    padding: var(--space-3) var(--space-6); /* Padding interno generoso */
+    border: none;                           /* Sin borde por defecto */
+    border-radius: var(--radius-lg);        /* Bordes redondeados */
+    font-weight: 600;                       /* Texto semi-bold */
+    text-decoration: none;                  /* Sin subrayado para enlaces */
+    cursor: pointer;                        /* Cursor de puntero */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animación suave personalizada */
+    font-size: 0.875rem;                   /* Tamaño de texto consistente */
+    line-height: 1;                         /* Altura de línea compacta */
+    position: relative;                     /* Para pseudo-elementos */
+    overflow: hidden;                       /* Oculta desbordamientos de animación */
+    text-align: center;                     /* Texto centrado */
+}
+
+/* Pseudo-elemento para efectos de hover */
+.btn::before {
+    content: '';                            /* Elemento vacío para efectos */
+    position: absolute;                     /* Posicionamiento absoluto */
+    top: 0;                                 /* Alineado al top */
+    left: -100%;                           /* Inicialmente fuera de vista */
+    width: 100%;                           /* Ancho completo */
+    height: 100%;                          /* Alto completo */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); /* Efecto brillo */
+    transition: left 0.6s;                 /* Animación suave del desplazamiento */
+}
+
+/* Animación del efecto brillo en hover */
+.btn:hover::before {
+    left: 100%;                            /* Desplaza el brillo a través del botón */
+}
+
+/* Botón primario - estilo principal de la aplicación */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600)); /* Gradiente azul */
+    color: white;                          /* Texto blanco para contraste */
+    box-shadow: var(--shadow-lg);          /* Sombra prominente */
+    border: 2px solid transparent;         /* Borde transparente para transiciones */
+}
+
+/* Estados de interacción del botón primario */
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-700)); /* Gradiente más oscuro */
+    transform: translateY(-4px) scale(1.02); /* Elevación y crecimiento sutil */
+    box-shadow: var(--shadow-2xl);         /* Sombra más intensa */
+}
+
+/* Botón outline - estilo secundario transparente */
+.btn-outline {
+    background: rgba(255, 255, 255, 0.9);  /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);            /* Efecto glassmorphism */
+    color: var(--primary-600);              /* Color de texto primario */
+    border: 2px solid var(--primary-300);  /* Borde sutil */
+    box-shadow: var(--shadow);              /* Sombra ligera */
+}
+
+/* Estados de interacción del botón outline */
+.btn-outline:hover {
+    background: var(--primary-50);          /* Fondo tintado en hover */
+    border-color: var(--primary-500);      /* Borde más intenso */
+    color: var(--primary-700);             /* Texto más oscuro */
+    transform: translateY(-2px);           /* Elevación sutil */
+    box-shadow: var(--shadow-lg);          /* Sombra aumentada */
+}
+
+/* Variante de botón grande para CTAs importantes */
+.btn-large {
+    padding: var(--space-5) var(--space-8);  /* Padding aumentado */
+    font-size: 1.125rem;                     /* Texto más grande */
+    border-radius: var(--radius-xl);         /* Bordes más redondeados */
+}
+
+/* ================================
+   CONTENIDO PRINCIPAL
+   ================================ */
+
+/* Contenedor principal del contenido */
+.main-content {
+    min-height: calc(100vh - 80px);         /* Altura mínima menos header */
+}
+
+/* ================================
+   SECCIÓN HERO/PORTADA
+   ================================ */
+
+/* Layout principal de la sección hero */
+.hero {
+    display: flex;                          /* Layout flexbox */
+    align-items: center;                    /* Centrado vertical */
+    gap: var(--space-20);                   /* Espaciado entre contenido e imagen */
+    padding: var(--space-24) var(--space-4); /* Padding generoso */
+    max-width: 1200px;                     /* Ancho máximo consistente */
+    margin: 0 auto;                        /* Centrado horizontal */
+    min-height: 80vh;                      /* Altura mínima de viewport */
+}
+
+/* Contenido textual del hero */
+.hero-content {
+    flex: 1;                               /* Ocupa espacio flexible */
+    max-width: 600px;                      /* Ancho máximo para legibilidad */
+}
+
+/* Título principal de la aplicación */
+.hero-title {
+    font-size: 4rem;                       /* Tamaño muy grande para impacto */
+    font-weight: 900;                      /* Peso extra pesado */
+    line-height: 1.1;                      /* Altura de línea compacta */
+    margin-bottom: var(--space-8);         /* Espaciado inferior generoso */
+    background: linear-gradient(135deg, var(--primary-600), var(--accent-600), var(--secondary-600)); /* Gradiente tricolor */
+    -webkit-background-clip: text;         /* Aplicar gradiente al texto */
+    -webkit-text-fill-color: transparent;  /* Hacer texto transparente */
+    background-clip: text;                 /* Soporte cross-browser */
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Descripción principal bajo el título */
+.hero-description {
+    font-size: 1.375rem;                  /* Tamaño prominente pero legible */
+    color: var(--gray-600);                /* Color suave para texto de apoyo */
+    margin-bottom: var(--space-10);        /* Espaciado antes de botones */
+    line-height: 1.7;                      /* Altura de línea para legibilidad */
+}
+
+/* Contenedor de botones de acción del hero */
+.hero-actions {
+    display: flex;                         /* Layout flexbox para botones */
+    gap: var(--space-6);                   /* Espaciado entre botones */
+    flex-wrap: wrap;                       /* Permite salto de línea en móviles */
+}
+
+/* Contenedor de imagen del hero */
+.hero-image {
+    flex: 1;                              /* Ocupa espacio flexible */
+    max-width: 500px;                     /* Ancho máximo para la imagen */
+    position: relative;                   /* Para pseudo-elementos */
+}
+
+/* Efecto de fondo difuso detrás de la imagen */
+.hero-image::before {
+    content: '';                          /* Elemento vacío */
+    position: absolute;                   /* Posicionamiento absoluto */
+    top: -20px;                          /* Expansión hacia arriba */
+    left: -20px;                         /* Expansión hacia la izquierda */
+    right: -20px;                        /* Expansión hacia la derecha */
+    bottom: -20px;                       /* Expansión hacia abajo */
+    background: linear-gradient(135deg, var(--primary-200), var(--secondary-200), var(--accent-200)); /* Gradiente suave */
+    border-radius: var(--radius-2xl);    /* Bordes redondeados */
+    z-index: -1;                         /* Detrás de la imagen */
+    opacity: 0.3;                        /* Transparencia sutil */
+    filter: blur(20px);                  /* Efecto de desenfoque */
+}
+
+/* Estilos para la imagen principal del hero */
+.hero-image img {
+    width: 100%;                         /* Ancho completo del contenedor */
+    height: auto;                        /* Alto automático para mantener proporción */
+    border-radius: var(--radius-2xl);    /* Bordes redondeados */
+    box-shadow: var(--shadow-2xl);       /* Sombra prominente */
+    transition: transform 0.4s ease;     /* Animación suave de transformación */
+}
+
+/* Efecto de hover en la imagen */
+.hero-image:hover img {
+    transform: scale(1.02) rotate(1deg);  /* Ligero crecimiento y rotación */
+}
+
+/* Fallback cuando la imagen del hero no carga */
+.hero-image.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+    background: linear-gradient(135deg, var(--primary-200), var(--secondary-200), var(--accent-200));
+    border-radius: var(--radius-2xl);
+    position: relative;
+    color: var(--primary-800);
+    font-weight: 600;
+    font-size: 1.25rem;
+    box-shadow: var(--shadow-2xl);
+    text-align: center;
+    padding: var(--space-8);
+}
+
+.hero-image.no-image::before {
+    content: '\f06a'; /* Font Awesome exclamation-circle */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    display: block;
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+    opacity: 0.85;
+}
+
+.hero-image.no-image::after {
+    content: 'Imagen no disponible';
+    display: block;
+    opacity: 0.9;
+}
+
+/* ================================
+   SECCIÓN DE CARACTERÍSTICAS
+   ================================ */
+
+/* Contenedor principal de la sección features */
+.features {
+    padding: var(--space-24) 0;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--primary-100);
+    border-bottom: 1px solid var(--primary-100);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    font-size: 3rem;
+    color: var(--gray-900);
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 6px;
+    background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+    border-radius: var(--radius);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-8);
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--primary-100);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-2xl);
+    border-color: var(--primary-300);
+}
+
+.feature-card:hover::before {
+    opacity: 0.8;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+    border-radius: var(--radius-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-6);
+    color: white;
+    font-size: 2rem;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: var(--shadow-xl);
+}
+
+.feature-card h3 {
+    color: var(--gray-900);
+    margin-bottom: var(--space-4);
+    font-size: 1.5rem;
+}
+
+.feature-card p {
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* CTA Section */
+.cta {
+    padding: var(--space-24) 0;
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600), var(--accent-600));
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="1" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+.cta h2 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: var(--space-6);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta .btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.25rem;
+    padding: var(--space-5) var(--space-10);
+}
+
+.cta .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* ================================
+   PIE DE PÁGINA
+   ================================ */
+
+/* Contenedor principal del footer */
+.footer {
+    background: var(--gray-900);
+    color: var(--gray-300);
+    padding: var(--space-12) 0;
+    border-top: 1px solid var(--gray-800);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-300);
+}
+
+.footer-brand i {
+    font-size: 1.5rem;
+}
+
+.footer-links p {
+    margin: 0;
+    color: var(--gray-400);
+}
+
+/* ================================
+   DISEÑO RESPONSIVO
+   ================================ */
+
+/* Tablets y dispositivos medianos (hasta 768px) */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-16) var(--space-4);
+        gap: var(--space-12);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.125rem;
+    }
+
+    .hero-actions {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+
+    .feature-card {
+        padding: var(--space-6);
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .cta h2 {
+        font-size: 2rem;
+    }
+
+    .cta p {
+        font-size: 1rem;
+    }
+
+    .nav-auth {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Teléfonos móviles y dispositivos pequeños (hasta 480px) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .btn-large {
+        padding: var(--space-4) var(--space-6);
+        font-size: 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: var(--space-4);
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content,
+.hero-image,
+.feature-card {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.feature-card:nth-child(2) { animation-delay: 0.1s; }
+.feature-card:nth-child(3) { animation-delay: 0.2s; }
+.feature-card:nth-child(4) { animation-delay: 0.3s; }
+.feature-card:nth-child(5) { animation-delay: 0.4s; }
+.feature-card:nth-child(6) { animation-delay: 0.5s; }

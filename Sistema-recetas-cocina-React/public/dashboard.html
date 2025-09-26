@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- 
+    ===================================
+    DASHBOARD PRINCIPAL
+    Sistema de Recetas de Cocina
+    ===================================
+    
+    Panel de control principal para usuarios autenticados
+    - Estadísticas generales del usuario
+    - Acceso rápido a funcionalidades principales
+    - Navegación entre secciones (recetas, ingredientes, votos)
+    - Información del perfil del usuario
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Recetas</title>
+    <!-- Estilos específicos para el dashboard -->
+    <link rel="stylesheet" href="dashboard-page.css">
+    <!-- Iconos de Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- ===================================
+         BARRA DE NAVEGACIÓN PRINCIPAL
+         Navegación entre secciones + info del usuario
+         =================================== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-utensils"></i>
+                <span>Sistema de Recetas</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="recipes.html" class="nav-link">Recetas</a>
+                <a href="ingredients.html" class="nav-link">Ingredientes</a>
+                <a href="votos.html" class="nav-link">Votos</a>
+            </div>
+            
+            <div class="nav-user">
+                <span id="userName">Usuario</span>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Bienvenido al Sistema de Recetas</h1>
+                <p>Gestiona tus recetas e ingredientes de manera fácil y eficiente</p>
+            </div>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalRecipes">0</h3>
+                        <p>Recetas Totales</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-carrot"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalIngredients">0</h3>
+                        <p>Ingredientes</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalVotes">0</h3>
+                        <p>Votos Recibidos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-actions">
+                <div class="action-card">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3>Crear Nueva Receta</h3>
+                    <p>Agrega una nueva receta a tu colección</p>
+                    <a href="recipes.html" class="btn-primary">Ir a Recetas</a>
+                </div>
+                
+                <div class="action-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Gestionar Ingredientes</h3>
+                    <p>Administra tu base de datos de ingredientes</p>
+                    <a href="ingredients.html" class="btn-primary">Ir a Ingredientes</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div id="toast-container" class="toast-container"></div>
+    
+    <script src="dashboard.js"></script>
+</body>
+</html>

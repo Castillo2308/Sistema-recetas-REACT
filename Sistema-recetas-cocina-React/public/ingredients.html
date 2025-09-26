@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredientes - Sistema de Recetas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ui-core.css">
+    <link rel="stylesheet" href="ingredients.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-utensils"></i>
+                <span>Sistema de Recetas</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="recipes.html" class="nav-link">Recetas</a>
+                <a href="ingredients.html" class="nav-link active">Ingredientes</a>
+                <a href="votos.html" class="nav-link">Votos</a>
+            </div>
+            
+            <div class="nav-user">
+                <span id="userName">Usuario</span>
+                <button class="btn-logout" id="btnLogout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Gestión de Ingredientes</h1>
+                <button class="btn-primary" id="btnAddIngredient">
+                    <i class="fas fa-plus"></i>
+                    Agregar Ingrediente
+                </button>
+            </div>
+        <div class="actions-bar">
+            <input type="text" id="searchInput" placeholder="Buscar ingrediente...">
+            <select id="categoryFilter">
+                <option value="">Todas las categorías</option>
+                <option value="Verduras">Verduras</option>
+                <option value="Frutas">Frutas</option>
+                <option value="Carnes">Carnes</option>
+                <option value="Pescados y Mariscos">Pescados y Mariscos</option>
+                <option value="Lácteos">Lácteos</option>
+                <option value="Granos y Cereales">Granos y Cereales</option>
+                <option value="Legumbres">Legumbres</option>
+                <option value="Especias y Condimentos">Especias y Condimentos</option>
+                <option value="Aceites y Grasas">Aceites y Grasas</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Otros">Otros</option>
+            </select>
+        </div>
+        <div id="ingredientsGrid" class="ingredients-grid"></div>
+        <div id="loading" class="loading" style="display:none;">
+            <div class="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+        </div>
+    </main>
+    
+    <!-- Modal de Ingrediente -->
+    <div id="ingredientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Agregar Nuevo Ingrediente</h2>
+                <button class="modal-close" id="ingredientModalClose" aria-label="Cerrar">&times;</button>
+            </div>
+            <p class="modal-subtitle">Completa los datos del ingrediente para añadirlo a tu base.</p>
+            <form id="ingredientForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categoría</label>
+                        <select id="category" name="category" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Frutas">Frutas</option>
+                        <option value="Carnes">Carnes</option>
+                        <option value="Pescados y Mariscos">Pescados y Mariscos</option>
+                        <option value="Lácteos">Lácteos</option>
+                        <option value="Granos y Cereales">Granos y Cereales</option>
+                        <option value="Legumbres">Legumbres</option>
+                        <option value="Especias y Condimentos">Especias y Condimentos</option>
+                        <option value="Aceites y Grasas">Aceites y Grasas</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="commonUnits">Unidades comunes (separadas por coma)</label>
+                    <input type="text" id="commonUnits" name="commonUnits" placeholder="ej: gramo, pieza, taza">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Guardar</button>
+                    <button type="button" class="btn-secondary" id="ingredientCancelBtn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="toast-container" class="toast-container"></div>
+    <script src="ingredients.js"></script>
+</body>
+</html>

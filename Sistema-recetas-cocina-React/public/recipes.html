@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetas - Sistema de Recetas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ui-core.css">
+    <link rel="stylesheet" href="recipes.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-utensils"></i>
+                <span>Sistema de Recetas</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="recipes.html" class="nav-link active">Recetas</a>
+                <a href="ingredients.html" class="nav-link">Ingredientes</a>
+                <a href="votos.html" class="nav-link">Votos</a>
+            </div>
+            
+            <div class="nav-user">
+                <span id="userName">Usuario</span>
+                <button class="btn-logout" id="btnLogout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Gestión de Recetas</h1>
+                <button class="btn-primary" id="btnAddRecipe">
+                    <i class="fas fa-plus"></i>
+                    Agregar Receta
+                </button>
+            </div>
+            
+            <div class="search-filters">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar recetas...">
+                    <button id="btnSearchRecipe">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <select id="categoryFilter">
+                        <option value="">Todas las categorías</option>
+                        <option value="Desayuno">Desayuno</option>
+                        <option value="Almuerzo">Almuerzo</option>
+                        <option value="Cena">Cena</option>
+                        <option value="Postre">Postre</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Bebida">Bebida</option>
+                    </select>
+                    
+                    <select id="difficultyFilter">
+                        <option value="">Todas las dificultades</option>
+                        <option value="Fácil">Fácil</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Difícil">Difícil</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="recipesGrid" class="recipes-grid">
+                <!-- Las recetas se cargarán aquí dinámicamente -->
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Cargando recetas...</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal para agregar/editar receta -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Agregar Nueva Receta</h2>
+                <button class="modal-close" id="recipeModalClose">&times;</button>
+            </div>
+            <p class="modal-subtitle">Describe tu receta con detalle para que otros puedan prepararla.</p>
+            <form id="recipeForm" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">Título:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categoría:</label>
+                        <select id="category" name="category" required>
+                            <option value="">Seleccionar</option>
+                            <option value="Desayuno">Desayuno</option>
+                            <option value="Almuerzo">Almuerzo</option>
+                            <option value="Cena">Cena</option>
+                            <option value="Postre">Postre</option>
+                            <option value="Snack">Snack</option>
+                            <option value="Bebida">Bebida</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Descripción:</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="preparationTime">Tiempo Preparación (min):</label>
+                        <input type="number" id="preparationTime" name="preparationTime" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cookingTime">Tiempo Cocción (min):</label>
+                        <input type="number" id="cookingTime" name="cookingTime" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="servings">Porciones:</label>
+                        <input type="number" id="servings" name="servings" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="difficulty">Dificultad:</label>
+                        <select id="difficulty" name="difficulty" required>
+                            <option value="">Seleccionar</option>
+                            <option value="Fácil">Fácil</option>
+                            <option value="Intermedio">Intermedio</option>
+                            <option value="Difícil">Difícil</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Ingredientes:</label>
+                    <div class="ingredients-input">
+                        <select id="ingredientSelect">
+                            <option value="">Seleccionar ingrediente</option>
+                        </select>
+                        <input type="text" id="quantity" placeholder="Cantidad">
+                        <input type="text" id="unit" placeholder="Unidad">
+                        <button type="button" id="btnAddRecipeIngredient" class="btn-chip">Agregar</button>
+                    </div>
+                    <div id="ingredientsList" class="ingredients-list"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="instructions">Instrucciones:</label>
+                    <textarea id="instructions" name="instructions" rows="6" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="image">Imagen:</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" id="recipeCancelBtn" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar Receta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal para ver detalles de receta -->
+    <div id="viewRecipeModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="viewRecipeTitle">Detalles de la Receta</h2>
+                <button class="modal-close" id="viewRecipeModalClose">&times;</button>
+            </div>
+            <div id="recipeDetails" class="recipe-details">
+                <!-- Los detalles se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast-container" class="toast-container"></div>
+    
+    <script src="recipes.js"></script>
+</body>
+</html>
